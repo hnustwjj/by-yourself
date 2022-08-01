@@ -69,3 +69,5 @@ effect(() => {
 
 a.name = 'jzsp';
 a.friend.name = 'jzsp2';
+
+export {}

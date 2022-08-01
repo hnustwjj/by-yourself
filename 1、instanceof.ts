@@ -13,3 +13,4 @@ console.log(myInstanceOf([], Object));
 
 console.log(myInstanceOf(Function, Function));
 console.log(myInstanceOf([], Object));
+export {}
