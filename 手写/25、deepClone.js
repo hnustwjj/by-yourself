@@ -8,11 +8,13 @@ function isObject(raw) {
 }
 function deepClone(raw, map = new Map()) {
   if (!isObject(raw)) return raw
-  if (raw instanceof Set) return new Set(raw)
+  if (raw instanceof Set) return new Set(raw) //处理set和map
   if (raw instanceof Map) return new Map(raw)
-  if (raw instanceof Symbol) return Symbol(raw.description)
+  if (raw instanceof Symbol) return Symbol(raw.description) //处理symbol
 
+  // 循环引用
   if (map.has(raw)) return map.get(raw)
+  // 处理数组
   const res = Array.isArray(raw) ? [] : {}
   map.set(raw, res)
   const keys = Object.keys(raw)
@@ -22,6 +24,7 @@ function deepClone(raw, map = new Map()) {
     res[key] = !isObject(value) ? value : deepClone(value, map)
   })
 
+  // 处理symbol
   const symbolKeys = Object.getOwnPropertySymbols(raw)
   symbolKeys.forEach(key => {
     const value = raw[key]
