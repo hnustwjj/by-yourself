@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="#/a">a</a>
+    <a href="#/b">b</a>
+
+    <button onclick="historyTo('/a')">a</button>
+    <button onclick="historyTo('/b')">b</button>
+
+    <button onclick="hashTo('/a')">a</button>
+    <button onclick="hashTo('/b')">b</button>
+    <div class="box"></div>
+  </body>
+  <script>
+    const box = document.getElementsByClassName("box")[0]
+    window.onhashchange = e => {
+      console.log(e)
+      // 在hash改变的时候渲染对应的组件到router-view中
+      box.innerHTML = e.newURL
+    }
+    window.onpopstate = e => {
+      console.log(e)
+    }
+    function historyTo(url) {
+      history.pushState({}, null, url)
+      // 在改变完url之后，渲染对应的组件到router-view中
+      box.innerHTML = url
+    }
+
+    function hashTo(url) {
+      location.hash = url
+    }
+  </script>
+</html>
