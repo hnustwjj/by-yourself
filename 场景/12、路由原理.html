@@ -26,6 +26,7 @@
     }
     window.onpopstate = e => {
       console.log(e)
+      // 对于go和back这两个api，他们会监听到
     }
     function historyTo(url) {
       history.pushState({}, null, url)
