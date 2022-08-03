@@ -1,0 +1,23 @@
+<style>
+  #container {
+    width: 50px;
+    height: 50px;
+    background: #000;
+  }
+  #container[data-device="2"] {
+    position: relative;
+  }
+  #container[data-device="2"]::after {
+    position: absolute;
+    border: 1px solid yellow;
+    content: "";
+    width: 200%;
+    height: 200%;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+    transform: scale(0.5) translateX(-50%) translateY(-50%);
+    box-sizing: border-box;
+  }
+</style>
+<div id="container" data-device="2"></div>
