@@ -22,7 +22,7 @@ class EventBus {
     const fn = (...args) => {
       callback.call(null, ...args)
       console.log("执行结束，删除")
-      target.splice(target.indexOf(fn), 1)
+      this.off(key, callback)
     }
     if (!target) this.keyMap[key] = [fn]
     else {
