@@ -16,4 +16,4 @@ const todo: TodoPreview = {
   title: "Clean room",
   completed: false,
 }
- export {}
+export {}
