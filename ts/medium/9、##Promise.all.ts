@@ -4,6 +4,7 @@ const promise3 = new Promise<string>((resolve, reject) => {
   setTimeout(resolve, 100, "foo")
 })
 
+// 如果想把函数里的参数拿来用，最好需要用泛型先声明一下
 declare function PromiseAll<T extends unknown[]>(
   values: readonly [...T]
 ): Promise<{
