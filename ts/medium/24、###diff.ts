@@ -27,7 +27,6 @@ type Foo = {
 }
 type Bar = {
   name: string
-  age: string
   gender: number
 }
 
