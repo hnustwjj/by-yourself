@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="foo()"></button>
+  </body>
+  <script>
+    const controller = new AbortController()
+    const signal = controller.signal // 创建一个controller，获取signal
+
+    // signal标志一个fetch请求，可以监听abort事件，可以在e.reason中获取到abort的内容
+    signal.addEventListener("abort", function (e) {
+      console.log(signal, "signal的中断状态")
+    })
+
+    async function foo() {
+      const res = await fetch("http://42.192.65.59:3000/article", {
+        signal,
+      }).then(res => res.json())
+      console.log(res)
+    }
+    foo()
+
+    // 取消请求
+    controller.abort({
+      name: "CondorHero",
+      age: 19,
+    })
+  </script>
+</html>
