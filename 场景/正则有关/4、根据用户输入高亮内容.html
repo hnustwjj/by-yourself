@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>jzspjzspjzsp</div>
+  </body>
+
+  <script>
+    const target = document.querySelector("div")
+    // 获取用户输入的内容
+    const content = prompt("请输入要匹配的内容，支持正则")
+    // 创建正则
+    const reg = new RegExp(content, "g")
+    // 替换
+    target.innerHTML = target.innerHTML.replace(reg, match => {
+      return `<span style="color:red">${match}</span>`
+    })
+  </script>
+</html>
