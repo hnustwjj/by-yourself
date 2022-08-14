@@ -1,17 +1,3 @@
-function getPostOrderOfTree(preStr, midStr, cache = "") {
-  if (preStr.length === 0) return ""
-  const root = preStr[0]
-  const midRight = midStr.slice(midStr.indexOf(root) + 1)
-  const midLeft = midStr.slice(0, midStr.indexOf(root))
-
-  const preLeft = preStr.slice(1, midLeft.length + 1)
-  const preRight = preStr.slice(midLeft.length + 1)
-  let res = ""
-  res += getPostOrderOfTree(preLeft, midLeft, cache)
-  res += getPostOrderOfTree(preRight, midRight, cache)
-  res += root
-  return res
+function removeH(node) {
+  node.innerHTML = node.innerHTML.replace(/<(h[1-6])>[\d\D]<\/\1>/g, "")
 }
-
-console.log(getPostOrderOfTree("ACDEFHGB", "DECAHFBG"))
-

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" value="3952038490@qq.com" name="email" />
+  </body>
+  <script>
+    const input = document.querySelector("[name='email']")
+    input.addEventListener("input", () => {
+      const value = input.value
+      // 多个字符和-号  @  （多个字符和-号和.号）多个  尾缀
+      const reg = /^[\w-]+@([\w-]+\.)+(com|cn|cc|net)$/
+      console.log(reg.test(value))
+    })
+    // asj-as123@qq.com
+    // 123123@qq.com
+    // 123@sina.com.cn
+  </script>
+</html>
