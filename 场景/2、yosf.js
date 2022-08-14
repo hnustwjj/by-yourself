@@ -9,6 +9,7 @@ function yosf(arr, num = 3, current = 0) {
     return yosf(arr, num, index)
   }
 }
+
 let allplayer = []
 for (let i = 0; i < 30; i++) {
   allplayer[i] = i + 1
