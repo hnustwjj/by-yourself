@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="test">
+        1111
+        <div class="test">2222</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const outer = document.querySelector(".outer")
+    function find(node, className, cache = []) {
+      if (!node) return
+      if (node.className === className) cache.push(node)
+      // 不知道为什么用children获取不到子元素。。。所以用这种方式代替了
+      const children = [...node.childNodes].filter(i => i instanceof HTMLElement)
+      console.log("parent", node, "children", node.children)
+      children.forEach(i => {
+        find(i, className, cache)
+      })
+      return cache
+    }
+    window.addEventListener("DOMContentLoaded", () => {
+      console.log(find(outer, "test"))
+    })
+  </script>
+</html>

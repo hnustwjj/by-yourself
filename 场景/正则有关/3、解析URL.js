@@ -12,6 +12,7 @@ function parseOne(url) {
   let str = url.slice(1)
   const res = {}
   str.replace(/(\w+)=(\w+)/g, ($, $1, $2) => {
+    console.log($, $1, $2)
     res[$1] = $2
   })
   return res
