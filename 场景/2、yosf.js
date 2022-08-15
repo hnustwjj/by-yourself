@@ -14,4 +14,22 @@ let allplayer = []
 for (let i = 0; i < 30; i++) {
   allplayer[i] = i + 1
 }
+
+
+// https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/
+// n个人中，数到m出局的下标
+var lastRemaining = function (n, m) {
+  // 如果只剩一个人，那么出局下标就为0
+  if (n === 1) {
+    return 0
+  }
+  // 否则就是上一个n-1个人里数到m出局的人+m对应的下标
+  return (lastRemaining(n - 1, m) + m) % n
+}
+
+var lastRemaining = function(n, m) {
+  let ans = 0;
+  for(let i = 2;i <= n;i++) ans = (ans+m)%i;
+  return ans;
+};
 console.log(yosf(allplayer, 3))
