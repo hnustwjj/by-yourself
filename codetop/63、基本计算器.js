@@ -1,4 +1,6 @@
-// 
+// https://leetcode.cn/submissions/detail/351845518/
+
+// 思路，先处理乘除，然后处理加减
 var calculate = function (s) {
   let cache = []
   const type = ["+", "-", "*", "/"]
