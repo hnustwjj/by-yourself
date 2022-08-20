@@ -1,6 +1,7 @@
 // https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
 
 // 思路：保存路径，找前面相同的最后一个结点
+// 也可以用一个set保存某个节点的所有父节点，再遍历另一个节点的所有父亲，看是否有相同的父亲
 var lowestCommonAncestor = function (root, p, q) {
   let pPath = null
   let qPath = null
