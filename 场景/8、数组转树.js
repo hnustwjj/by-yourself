@@ -41,10 +41,14 @@ const tree = [
 function parse(arr) {
   const cache = new Map()
   const res = []
+
+  // 保存每一个id
   arr.forEach(item => {
     cache.set(item.id, item)
   })
 
+  // 重新遍历，如果pid不存在说明是顶级父亲，放入res
+  // 否则就加入对应父亲的children中
   arr.forEach(item => {
     const parent = cache.get(item.pid)
     if (!parent) res.push(item)
