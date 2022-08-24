@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>jzsp</div>
+  </body>
+  <script>
+    const str = `
+      <div id="qiankun">
+        <div id="app">app</div>
+        <style>
+          div {
+            color: red;
+          }
+        </style>
+      </div>
+    `
+    const app = document.createElement("div") //app
+    app.innerHTML = str //挂载qiankun获取到的html字符串
+
+    const container = app.children[0] // 获取最外层dom
+    const html = container.innerHTML // 取出内容
+    container.innerHTML = "" // 置空
+
+    const shadow = container.attachShadow({ mode: "open" }) //设置影子
+    shadow.innerHTML = html // 将原来的内容挂载到影子dom里
+
+    document.body.appendChild(app) // 将app渲染
+  </script>
+</html>

@@ -26,18 +26,13 @@ console.log(compose(1, 2))
 //     return pre
 //   }
 // }
-function comp(...middlewares) {
-  const dispatch = index => {
-    if (index === middlewares.length) {
-      return Promise.resolve()
-    }
-    const middleware = middlewares[index]
-    const next = () => dispatch(index + 1)
-    try {
-      return Promise.resolve(middleware(next().value))
-    } catch (err) {
-      return Promise.reject(err)
-    }
-  }
-  return dispatch(0)
+
+function comp(...fns) {
+  if (fns.length === 0) return null
+  if (fns.length === 1) return fns[0]
+  // 注意包裹的范围，如果fn包在里面，就是逆时针执行fns
+  // 返回一个函数，这个函数可以接受参数，并这个函数的返回值是将前面已经组合的函数的执行结果作为参数传入到fn的执行结果
+  return fns.reduce(
+    (composed, fn) => (...args) => fn(composed(...args))
+  )
 }
