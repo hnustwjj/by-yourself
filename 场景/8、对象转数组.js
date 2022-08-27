@@ -23,7 +23,7 @@ const res = [
   { value: 1, label: "节点1" },
   { value: 2, parentId: 1, label: "节点1-1" },
   { value: 3, parentId: 2, label: "节点1-1-1" },
-  { value: 4, parentId: 1, label: "节点1-2" },
+  { value: 4, parentId: 1, label: "节点2" },
 ]
 
 // 先将所有的key，value保存在map中，key是儿子，value是父亲
