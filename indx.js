@@ -1,73 +1,71 @@
-// const matrix = [
-//   [".", ".", ".", ".", "."],
-//   [".", "R", "R", "D", "."],
-//   [".", "U", ".", "D", "R"],
-//   [".", "U", "L", "L", "."],
-//   [".", ".", ".", ".", "O"],
-// ]
+function swap(arr, i, j) {
+  const temp = arr[i]
+  arr[i] = arr[j]
+  arr[j] = temp
+}
 
-const matrix = [
-  [".", ".", "."],
-  [".", "O", "."],
-  [".", ".", "."],
-]
-
-// const matrix = [[".", ".", ".", "L", "O"]]
-const a = matrix.length
-const b = matrix[0].length
-const flags = new Array(a).fill(0).map(i => new Array(b).fill(2))
-
-const endx = 1
-const endy = 1
-
-let res = 0
-function dfs(i, j) {
-  if (i >= 0 && i < a && j >= 0 && j < b) {
-    if (flags[i][j] === 2) {
-      if (matrix[i][j] === "O") {
-        res++
-        dfs(i - 1, j)
-        dfs(i + 1, j)
-        dfs(i, j - 1)
-        dfs(i, j + 1)
-        flags[i][j] = 1
-        return 1
-      }
-      if (matrix[i][j] === ".") {
-        let d = 0
-        d += dfs(i - 1, j)
-        d += dfs(i + 1, j)
-        d += dfs(i, j - 1)
-        d += dfs(i, j + 1)
-        if (d === 0) {
-          flags[i][j] = 0
-          return 0
-        } else {
-          res++
-          flags[i][j] = 1
-          return 1
-        }
-      } else {
-        let d = 0
-        if (matrix[i][j] === "U") d += dfs(i - 1, j)
-        if (matrix[i][j] === "R") d += dfs(i, j + 1)
-        if (matrix[i][j] === "D") d += dfs(i + 1, j)
-        if (matrix[i][j] === "L") d += dfs(i, j - 1)
-        if (!d) {
-          flags[i][j] = 0
-          return 0
-        } else {
-          res++
-          flags[i][j] = 1
-          return 1
-        }
-      }
-    } else {
-      return flags[i][j]
-    }
+function isLarger(a, b, cb = (a, b) => a - b) {
+  if (cb(a, b) > 0) {
+    return true //a>b
   } else {
-    return 0
+    return false
   }
 }
-dfs(endx, endy)
-console.log(a * b - res)
+function priority_queue(arr, cb = (a, b) => a - b) {
+  this.arr = arr
+  function push(item) {
+    arr.push(item)
+    let index = arr.length - 1
+    let parentIndex = ~~((index - 1) / 2)
+    //如果index是0位置，那么父亲计算之后也是-0，自己跟自己比也会退出循环
+    while (cb(arr[index], arr[parentIndex]) > 0) {
+      swap(arr, index, parentIndex)
+      index = parentIndex
+      parentIndex = ~~((index - 1) / 2)
+    }
+  }
+
+  function pop() {
+    swap(arr, 0, arr.length - 1)
+    // 删除并获取数组的第一个元素，也就是堆顶
+    const res = arr.pop()
+    let parent = 0
+    let left = 1
+    const heapSize = arr.length
+    // 如果左孩子在堆中
+    while (left < heapSize) {
+      // 如果右孩子在堆中，且值更大，就把下标给largest
+      const largest =
+        left + 1 < heapSize && isLarger(arr[left + 1], arr[left], cb)
+          ? left + 1
+          : left
+      // 取出了下标大的孩子的时候，跟父亲比较，如果父亲大就break，否则就交换
+      if (isLarger(arr[largest], arr[parent], cb)) {
+        swap(arr, parent, largest)
+        parent = largest
+        //重新计算左孩子
+        left = parent * 2 + 1
+      } else {
+        break
+      }
+    }
+    return res
+  }
+
+  function isEmpty() {
+    return arr.length === 0
+  }
+
+  return { arr, push, pop, isEmpty }
+}
+
+const q = new priority_queue([])
+q.push(1)
+q.push(2)
+q.push(0)
+q.push(4)
+console.log(q)
+console.log(q.pop())
+console.log(q.pop())
+console.log(q.pop())
+console.log(q.pop())
