@@ -9,5 +9,4 @@ type find<arr extends unknown[], item extends unknown> = arr extends [
     : find<rest, item>
   : false
 
-
 type findres = find<[1, 2, 3], 5>
