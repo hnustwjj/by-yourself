@@ -1,16 +1,9 @@
-function parse(num) {
-  if(num % 2 === 0) return num
-  const arr = []
-  while (num) {
-    arr.push(num % 10)
-    num = ~~(num / 10)
-  }
-  arr.reverse()
-  const target = arr.findIndex(i => i % 2 === 0)
-  if (target !== -1) {
-    [arr[target], arr[arr.length - 1]] = [arr[arr.length - 1], arr[target]]
-    return arr.join('')
-  }
-  return -1
+var a = [];
+for (var i = 0; i < 3; i++) {
+  a[i] = (function () {
+    console.log(i);
+  })(i);
 }
-console.log(parse(1111))
+a[0](); //3
+a[1](); //3
+a[2](); //3
