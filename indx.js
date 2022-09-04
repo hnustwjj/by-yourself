@@ -1,9 +1,14 @@
-var a = [];
-for (var i = 0; i < 3; i++) {
-  a[i] = (function () {
-    console.log(i);
-  })(i);
-}
-a[0](); //3
-a[1](); //3
-a[2](); //3
+const a = {
+  toString() {
+    console.log("toString被调用");
+  },
+  valueOf() {
+    console.log("valueOf被调用");
+    return undefined;
+  },
+};
+
+console.log(a + 1);
+console.log(a * 2);
+console.log(a + "1");
+console.log(String(a));
