@@ -28,6 +28,9 @@ class EventBus {
     else {
       target.push(fn);
     }
+
+    // 返回的函数可以手动取消
+    return () => this.off(key, fn);
   }
 
   off(key, callback) {
