@@ -2,7 +2,7 @@ Array.prototype.map = function (cb) {
   const arr = this
   const res = []
   arr.forEach((item, index) => {
-    res.push(cb(item, index))
+    res.push(cb(item, index, arr))
   })
   return res
 }
