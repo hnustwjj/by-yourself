@@ -12,5 +12,9 @@ function parse2(str) {
   })
 }
 
+function parse3(str) {
+  return str.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+}
+
 console.log(parse1("1111111111111111111"))
 console.log(parse2("1111111111111111111"))
