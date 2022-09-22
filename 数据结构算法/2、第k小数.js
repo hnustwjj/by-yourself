@@ -15,17 +15,15 @@ function getK(arr,k){
     else swap(arr,index,--more)
   }
   swap(arr,arr.length-1,more)
-  console.log(splitNumber)
-  console.log(arr.slice(0,less+1))
-  console.log(arr.slice(more+1))
-  // 如果第k大数在等于区
-  // if(less < k  && more >= k ){
-  //   return splitNumber
-  // }else if(less >= k){
-  //   return getK(arr.slice(0,less+1),k)
-  // }else{
-  //   return getK(arr.slice(more+1),)
-  // }
+  // 如果第k小数在等于区 [less+1,more]
+  if(less+1 <= k - 1  && k - 1 <= more ){
+    return splitNumber
+  }else if(less >= k - 1){
+    return getK(arr.slice(0,less+1),k)
+  }else{
+    console.log('去大于区',arr.slice(more+1),'找第',k-more - 1)
+    return getK(arr.slice(more+1),k - more - 1)
+  }
 
 }
 
@@ -34,4 +32,4 @@ function getK(arr,k){
 
 
 
-console.log(getK([1,2,7,4,5,6,7,8],1))
+console.log(getK([1,2,7,4,5,6,7,8],8))
