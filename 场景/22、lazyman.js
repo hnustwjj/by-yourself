@@ -1,13 +1,12 @@
 class lazyMan {
   promises = []
   constructor(name) {
-    var template = Promise.resolve()
     // 这里的奇妙之处在于，异步的去遍历promises
     // 并且通过template.then()来控制异步的执行顺序
-    setTimeout(() => {
-      this.promises.forEach(v => {
-        template = template.then(v)
-      })
+    setTimeout(async () => {
+      for(const p of this.promises){
+        await p()
+      }
     }, 0)
   }
   sleep(time) {
