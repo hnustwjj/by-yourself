@@ -18,17 +18,21 @@
 输出：0
 
  */
+// 题目看错了，升序数组，只翻转一次
 var minArray = function (numbers) {
   let low = 0;
   let high = numbers.length - 1;
   while (low < high) {
     const mid = low + Math.floor((high - low) / 2);
-    // 升序，如果左段总体是升序的，那么最小值就在右侧
+    // 如果右侧是递增的，那么分界点就在左侧
     if (numbers[mid] < numbers[high]) {
       high = mid;
+
+      // 如果右侧是递减的，那么分界点就在右侧
     } else if (numbers[mid] > numbers[high]) {
       low = mid + 1;
     } else {
+      // 无法确定，high--
       high -= 1;
     }
   }
