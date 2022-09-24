@@ -19,6 +19,7 @@
 -100 <= arr[i] <= 100
  */
 var maxSubArray = function (nums) {
+  // dp[i]表示以i结尾的最大子数组和
   const dp = new Array(nums.length).fill(0);
   dp[0] = nums[0];
   let res = nums[0];
