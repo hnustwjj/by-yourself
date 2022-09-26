@@ -1,11 +1,12 @@
-type GreaterThen<num1, num2, cache extends unknown[] = []> =
- num1 extends num2
-  ? false
-  : cache["length"] extends num1
-    ? false
-    : cache["length"] extends num2
-      ? true
-      : GreaterThen<num1, num2, [...cache, unknown]>
-// 只能实现正数的比较
-type res = GreaterThen<3, 2>
+type Flat<T extends Array<unknown>,Cache extends Array<unknown>= []> = 
+T extends [
+  infer First,
+  ...infer rest
+] 
+? First extends Array<unknown> 
+  ? Flat<rest,[...Cache,...Flat<First>]>
+  : Flat<rest,[...Cache,First]>
+: Cache
+
+type res = Flat<[1,2,[1,2]]>
 export {}
