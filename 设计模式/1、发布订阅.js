@@ -49,6 +49,7 @@ eventBus.off("riyangzai", cb);
 
 const onceCb = duration => console.log("羊只想被日一次，", duration);
 eventBus.once("riyangzai", onceCb);
+
 // 触发事件
 eventBus.emit("riyangzai", 1000);
 eventBus.emit("riyangzai", 1000);

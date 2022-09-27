@@ -24,6 +24,7 @@ var maxSubArray = function (nums) {
   dp[0] = nums[0];
   let res = nums[0];
   for (let i = 1; i < nums.length; i++) {
+    // 肯定要以i结尾，所以就拿i-1的最大值+第i，和第i比
     dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
     res = Math.max(res, dp[i]);
   }
