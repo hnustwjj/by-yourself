@@ -1,34 +1,27 @@
-// 左侧有序，右侧有序，合并
-// sort的语义是让l-r的部分有序
-function sort(arr, l, r) {
-  // 那么我们只需要让左侧有序，让右侧有序，然后合并即可
-  //如果l和r一样，返回
-  if (l === r) return;
-  // 求中点
-  let middle = l + ((r - l) >> 1);
-  mergeSort(arr, l, middle);
-  mergeSort(arr, middle + 1, r);
-  //将左右侧有序的部分合并成一个部分
-  merge(arr, l, middle, r);
+function sort(arr) {
+  if (arr.length === 1) return arr;
+  const mid = ~~(arr.length / 2);
+  const left = sort(arr.slice(0, mid));
+  const right = sort(arr.slice(mid));
+  return merge(left, right);
 }
+sort(nums);
+function merge(arr1, arr2) {
+  let idx1 = 0;
+  let idx2 = 0;
 
-// 让arr的l-m和m-r部分按序合并（类似于合并两个链表）
-function merge(arr, L, M, R) {
-  const arr2 = new Array(R - L + 1);
-  let i = 0;
-  let p1 = L;
-  let p2 = M + 1;
-  while (p1 <= M && p2 <= R) {
-    //这里的判断决定了是升序还是降序（大的线插进去还是小的先插进去）
-    arr2[i++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
+  const res = [];
+
+  while (idx1 < arr1.length && idx2 < arr2.length) {
+    // 如果前面的大于后面的
+    if (arr1[idx1] > arr2[idx2]) {
+      res.push(arr2[idx2++]);
+    } else {
+      res.push(arr1[idx1++]);
+    }
   }
-  while (p1 <= M) arr2[i++] = arr[p1++];
-  while (p2 <= R) arr2[i++] = arr[p2++];
-  for (i = 0; i < arr2.length; i++) {
-    //注意，是将L到R部分更新，arr[i+L]
-    arr[i + L] = arr2[i];
-  }
+
+  while (idx1 < arr1.length) res.push(arr1[idx1++]);
+  while (idx2 < arr2.length) res.push(arr2[idx2++]);
+  return res;
 }
-
-mergeSort(arr, 0, arr.length - 1);
-console.log(arr);
