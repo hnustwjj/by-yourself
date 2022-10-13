@@ -9,3 +9,4 @@ type add<num1 extends number, num2 extends number> = [
 ]["length"]
 
 type res = add<1, 2>
+
