@@ -1,9 +1,8 @@
-type Flat<T extends any> = T extends any[]
-  ? T extends [infer F, ...infer Rest]
-    ? [...Flat<F>, ...Flat<Rest>]
-    : []
-  : [T]
+type test<T extends Record<string, any>> = T extends { c: any }
+  ? { a: number; c: number }
+  : { d: number; b: number };
 
-//[1,2,3,4,5]
-type res = Flat<[[1, 2, 3], 4, [[5]]]>
-export {}
+type res1 = test<{ c: 1 }>;
+type res2 = test<{ d: 1 }>;
+
+export {};
