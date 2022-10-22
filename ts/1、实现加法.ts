@@ -10,3 +10,4 @@ type add<num1 extends number, num2 extends number> = [
 
 type res = add<1, 2>
 
+const a:res = 2
