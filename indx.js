@@ -5,3 +5,4 @@ console.log(number || string);
 console.log(number && string);
 console.log(bool || number);
 console.log(bool && number);
+1
