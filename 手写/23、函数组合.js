@@ -33,8 +33,6 @@ function comp(...fns) {
   // 注意包裹的范围，如果fn包在里面，就是逆时针执行fns
   // 返回一个函数，这个函数可以接受参数，并这个函数的返回值是将前面已经组合的函数的执行结果作为参数传入到fn的执行结果
   return fns.reduce(
-    (composed, fn) =>
-      (...args) =>
-        fn(composed(...args))
+    (composed, fn) =>(...args) => fn(composed(...args))
   );
 }
