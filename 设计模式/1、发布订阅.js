@@ -24,8 +24,9 @@ class EventBus {
       console.log("执行结束，删除");
       this.off(key, fn);
     };
-    if (!target) this.keyMap[key] = [fn];
-    else {
+    if (!target) {
+      this.keyMap[key] = [fn];
+    } else {
       target.push(fn);
     }
 
