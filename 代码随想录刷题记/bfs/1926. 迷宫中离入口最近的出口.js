@@ -13,7 +13,7 @@ var nearestExit = function (maze, entrance) {
     { x: -1, y: 0 },
     { x: 1, y: 0 },
   ];
-  
+
   while (walkableArr.length) {
     let [row, col, step] = walkableArr.shift();
     // 设置当前点为+，标识已经压入过
@@ -52,6 +52,9 @@ var nearestExit = function (maze, entrance) {
 /**
  * 不知道我这个dfs写的有啥问题，最后几个用力过不了。。。
  * 好像是记录的并不是min
+ * 出问题了，下面这个例子答案是1，但是输出是3，因为5，8并不是直接到6，8，而是经过了一圈...
+ * 检查发现，应该打标机，删标记（不然就回出现上面这种情况）
+ * 所以还是用bfs吧
  */
 var nearestExit = function (maze, entrance) {
   const row = maze.length;
@@ -62,9 +65,8 @@ var nearestExit = function (maze, entrance) {
     { x: -1, y: 0 },
     { x: 1, y: 0 },
   ];
-  let res = Infinity
+  let res = Infinity;
   function dfs(i, j, len = 0) {
-    let min = Infinity;
     maze[i][j] = "+";
     for (let k = 0; k < arrow.length; k++) {
       const { x, y } = arrow[k];
@@ -77,34 +79,37 @@ var nearestExit = function (maze, entrance) {
         nextY <= column - 1 &&
         maze[nextX][nextY] === "."
       ) {
+        maze[nextX][nextY] = "+";
         if (
           nextX == 0 ||
           nextY === 0 ||
           nextX === row - 1 ||
           nextY === column - 1
-        ){
-          res = Math.min(res,len+1)
+        ) {
+          console.log(nextX,nextY,len+1)
+          res = Math.min(res, len + 1);
         }
-          
-        maze[nextX][nextY] = "+";
-        min = Math.min(min, dfs(nextX, nextY, len + 1));
+        dfs(nextX, nextY, len + 1);
+        maze[nextX][nextY] = ".";
       }
     }
-    return min;
   }
   dfs(...entrance);
   return res === Infinity ? -1 : res;
 };
-
 console.log(
   nearestExit(
     [
-      ["+", ".", "+", "+", "+", "+", "+"],
-      ["+", ".", "+", ".", ".", ".", "+"],
-      ["+", ".", "+", ".", "+", ".", "+"],
-      ["+", ".", ".", ".", "+", ".", "+"],
-      ["+", "+", "+", "+", "+", ".", "+"],
+      [".", ".", ".", ".", ".", ".", ".", "+", "."],
+      [".", "+", ".", ".", ".", "+", ".", "+", "+"],
+      [".", ".", ".", ".", "+", ".", ".", ".", "."],
+      [".", ".", "+", ".", ".", "+", ".", ".", "."],
+      ["+", ".", ".", "+", ".", ".", ".", ".", "+"],
+      [".", "+", ".", ".", ".", "+", ".", ".", "."],
+      [".", ".", "+", ".", ".", ".", "+", ".", "."],
+      [".", ".", "+", "+", "+", "+", "+", ".", "."],
+      [".", "+", "+", ".", ".", "+", ".", ".", "."],
     ],
-    [0, 1]
+    [5, 8]
   )
 );
