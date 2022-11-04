@@ -8,5 +8,5 @@ T extends [
   : Flat<rest,[...Cache,First]>
 : Cache
 
-type res = Flat<[1,2,[1,2]]>
+type res = Flat<[1,2,[1,2,[1,2]]]>
 export {}

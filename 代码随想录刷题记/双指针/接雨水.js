@@ -1,24 +1,23 @@
-var trap = function (height) {
-  let res = 0;
+// https://leetcode.cn/problems/trapping-rain-water/
 
-  // 标记当前左右的位置
-  let left = 0;
-  let right = height.length - 1;
-
-  // 标记左右目前为止的
-  let leftMax = 0;
-  let rightMax = 0;
-  for (let i = 0; i < height.length; i++) {
-    leftMax = Math.max(leftMax, height[left]);
-    rightMax = Math.max(rightMax, height[right]);
-    // 汇入小的那一方
-    if (leftMax < rightMax) {
-      res += leftMax - height[i];
-      left++;
-    } else {
-      res += rightMax - height[i];
-      right--;
-    }
+var trap = function(height) {
+  let left = 0
+  let right = height.length - 1
+  // 标记遍历时的左右最高点
+  let leftMax = 0
+  let rightMax = 0
+  let res = 0
+  while(left < right){
+      // 更新左右最高点
+      leftMax = Math.max(leftMax,height[left])
+      rightMax = Math.max(rightMax,height[right])
+      // leftMax和rightMax中间接雨水
+      // 当前边界（left or right）要接的水只能汇聚到矮的那一边，
+      if(leftMax < rightMax){
+          res += leftMax - height[left++]
+      }else{
+          res += rightMax - height[right--]
+      }
   }
-  return res;
+  return res
 };
