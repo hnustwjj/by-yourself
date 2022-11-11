@@ -17,6 +17,7 @@ var reverseBetween = function (head, left, right) {
   let pre = fake; // slow的前一个
   let slow = head; // slow
   let fast = head; // fast
+
   let cnt = right - left; 
   // 先让fast走cnt步骤
   while (cnt && fast) {
