@@ -1,4 +1,5 @@
-// 
+// 理解递归的语意，传入链表，返回有序链表
+// 那么我们可以传入链表的左右部分，合并两个有序链表
 const merge = (head1, head2) => {
   const dummyHead = new ListNode(0);
   let temp = dummyHead, temp1 = head1, temp2 = head2;
