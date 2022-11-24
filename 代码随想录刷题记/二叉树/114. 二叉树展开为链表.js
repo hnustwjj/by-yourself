@@ -1,6 +1,7 @@
 // 利用递归的语意，对左右子树进行构建操作，然后讲左右子树构建出来的链表拼接到right指针
 // 不要忘记讲left指向空
 var flatten = function (r) {
+  
   function dfs(root) {
     if (!root) return;
     let node = root;
